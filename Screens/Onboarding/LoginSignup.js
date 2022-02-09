@@ -1,16 +1,25 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import "react-native-gesture-handler";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
 const LoginSignup = ({ navigation }) => {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => {
-        navigation.goBack();
-      }}
-    >
-      <Text>LoginScreen</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Text>LoginScreen</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("MainStack");
+        }}
+      >
+        <Text>Go to Home</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
