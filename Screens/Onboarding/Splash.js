@@ -45,7 +45,7 @@ export default Splash;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Platform.OS == "ios" ? 30 : null,
+    paddingTop: Platform.OS == "ios" ? 40 : null,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.Primary,

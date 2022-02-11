@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-const Settings = ({ navigation }) => {
+const Profile = ({ navigation }) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -10,12 +10,12 @@ const Settings = ({ navigation }) => {
         navigation.goBack();
       }}
     >
-      <Text>Settings</Text>
+      <Text>Profile</Text>
     </TouchableOpacity>
   );
 };
 
-export default Settings;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {
