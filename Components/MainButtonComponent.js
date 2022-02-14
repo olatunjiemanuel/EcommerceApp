@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    height: 70,
+    width: 314,
   },
   buttonText: {
-    paddingVertical: 25,
-    paddingHorizontal: 100,
     fontSize: 20,
     fontWeight: "700",
   },
