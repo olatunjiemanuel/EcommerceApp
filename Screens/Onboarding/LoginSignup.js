@@ -1,6 +1,16 @@
 import "react-native-gesture-handler";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
+import React, { useState, useEffect } from "react";
+
+//Auth imports
+import { auth } from "../../fireBase";
 
 // Colors
 import Colors from "../../assets/Colors/Colors";
@@ -14,57 +24,101 @@ import MessageSvg from "../../assets/SVGs/MessageSvg";
 import FormComponent from "../../Components/FormComponent";
 
 const LoginSignup = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.replace("MainStack");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const handleSignUp = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(user.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const handleLogin = () => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Logged in With", user.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Welcome back</Text>
-      </View>
-      <View style={styles.bottomHalf}>
-        <View style={styles.loginTextContainer}>
-          <Text style={styles.loginText}>Login</Text>
+    <KeyboardAvoidingView style={styles.container} behavior="height">
+      <ScrollView>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>Welcome back</Text>
         </View>
-        <View style={styles.formContainer}>
-          <FormComponent
-            placeHolder="rosina@company.com"
-            formName="Email"
-            formSvg={<MessageSvg />}
-            textContentType="emailAddress"
-          />
-        </View>
-        <View>
-          <FormComponent
-            placeHolder="Password"
-            formName="Password"
-            formSvg={<MessageSvg />}
-            textContentType="password"
-          />
-        </View>
-        <View style={styles.forgotPasscode}>
-          <Text>Forgot passcode?</Text>
-        </View>
-        <View style={styles.MainButtonComponentContainer}>
-          <MainButtonComponent
-            buttonText="Login"
-            buttonBgColor={Colors.Primary}
-            buttonTextColor={Colors.White}
-            onPressHandler={() => {
-              navigation.navigate("MainStack");
+        <View style={styles.bottomHalf}>
+          <View style={styles.loginTextContainer}>
+            <Text style={styles.loginText}>Login</Text>
+          </View>
+          <View style={styles.formContainer}>
+            <FormComponent
+              placeHolder="rosina@company.com"
+              formName="Email"
+              formSvg={<MessageSvg />}
+              textContentType="emailAddress"
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+              }}
+            />
+          </View>
+          <View>
+            <FormComponent
+              placeHolder="Password"
+              formName="Password"
+              formSvg={<MessageSvg />}
+              textContentType="password"
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+              }}
+            />
+          </View>
+          <View style={styles.forgotPasscode}>
+            <Text>Forgot passcode?</Text>
+          </View>
+          <View style={styles.MainButtonComponentContainer}>
+            <MainButtonComponent
+              buttonText="Login"
+              buttonBgColor={Colors.Primary}
+              buttonTextColor={Colors.White}
+              onPressHandler={() => {
+                handleLogin();
+                // navigation.navigate("MainStack");
+              }}
+            />
+          </View>
+          <TouchableOpacity style={styles.createAccount} onPress={handleSignUp}>
+            <Text>Create account</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={() => {
+              navigation.goBack();
             }}
-          />
+          >
+            <Text>Cancel</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.createAccount}>
-          <Text>Create account</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.cancelButton}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Text>Cancel</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -5,7 +5,14 @@ import React from "react";
 import Colors from "../assets/Colors/Colors";
 
 const FormComponent = (props) => {
-  const { placeHolder, formName, formSvg, textContentType } = props;
+  const {
+    placeHolder,
+    formName,
+    formSvg,
+    textContentType,
+    value,
+    onChangeText,
+  } = props;
   return (
     <View>
       <View style={styles.formHeader}>
@@ -19,6 +26,8 @@ const FormComponent = (props) => {
           placeholder={placeHolder}
           style={styles.textInput}
           textContentType={textContentType}
+          value={value}
+          onChangeText={onChangeText}
         />
       </View>
     </View>
