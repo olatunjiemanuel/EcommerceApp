@@ -6,7 +6,7 @@ import React from "react";
 import Colors from "../../assets/Colors/Colors";
 
 //Component Imports
-import MainButtonComponent from "/Users/olatunji/EcommerceApp/Components/MainButtonComponent";
+import MainButtonComponent from "../../Components/MainButtonComponent";
 
 const Splash = ({ navigation }) => {
   return (
@@ -15,9 +15,7 @@ const Splash = ({ navigation }) => {
         <Text style={styles.mainText}>Find your Item</Text>
       </View>
       <View>
-        <Image
-          source={require("/Users/olatunji/EcommerceApp/assets/Images/FindYourGadget.png")}
-        />
+        <Image source={require("../../assets/Images/FindYourGadget.png")} />
       </View>
       {/* <View
         onPress={() => {

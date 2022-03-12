@@ -14,13 +14,13 @@ import LikesScreen from "./LikesScreen";
 import BuyScreen from "./BuyScreen";
 
 // Svg imports
-import HomeSvg from "/Users/olatunji/EcommerceApp/assets/SVGs/HomeSvg.js";
-import LikesSvg from "/Users/olatunji/EcommerceApp/assets/SVGs/LikesSvg";
-import ProfileSvg from "/Users/olatunji/EcommerceApp/assets/SVGs/ProfileSvg";
-import BuySvg from "/Users/olatunji/EcommerceApp/assets/SVGs/BuySvg";
+import HomeSvg from "../../assets/SVGs/HomeSvg";
+import LikesSvg from "../../assets/SVGs/LikesSvg";
+import ProfileSvg from "../../assets/SVGs/ProfileSvg";
+import BuySvg from "../../assets/SVGs/BuySvg";
 
 // colors Imports
-import Colors from "/Users/olatunji/EcommerceApp/assets/Colors/Colors";
+import Colors from "../../assets/Colors/Colors";
 
 //const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
